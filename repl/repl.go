@@ -8,7 +8,7 @@ import (
 	"io"
 	"os"
 )
-
+//Start reads lines in and writes tokens out
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 
