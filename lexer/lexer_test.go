@@ -7,14 +7,14 @@ import (
 )
 
 func TestNextToken(test *testing.T) {
-	input := `-/*let six = 6;
+	input := `-/*let _six = 6;
 	let nineteen = 19;
 	
 	let add = fn(x, y) {
 			x + y;
 		};
 	<>!
-	let result = add(six, nineteen);
+	let result = add(_six, nineteen);
 	if (result == 25) {
 		return true;
 	} else {
@@ -31,7 +31,7 @@ func TestNextToken(test *testing.T) {
 		{token.FSLASH, "/"},
 		{token.STAR, "*"},
 		{token.LET, "let"},
-		{token.IDENT, "six"},
+		{token.IDENT, "_six"},
 		{token.ASSIGN, "="},
 		{token.INT, "6"},
 		{token.SEMICOLON, ";"},
@@ -64,7 +64,7 @@ func TestNextToken(test *testing.T) {
 		{token.ASSIGN, "="},
 		{token.IDENT, "add"},		
 		{token.LROUND, "("},
-		{token.IDENT, "six"},
+		{token.IDENT, "_six"},
 		{token.COMMA, ","},
 		{token.IDENT, "nineteen"},
 		{token.RROUND, ")"},
