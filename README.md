@@ -25,6 +25,7 @@ Start reads lines in and writes tokens out
 --
     import "interpreter/lexer"
 
+BUG(nicholasgriffen): Lexers lack Unicode, UTF-8 support
 
 ## Usage
 
