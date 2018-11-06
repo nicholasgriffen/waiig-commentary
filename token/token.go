@@ -1,19 +1,18 @@
 package token
 //Type matters downstream
-type Type string
-//Token keywords, symbols
-type Token struct {
-	Type	Type
-	Literal string
-}
+type TokenType string
 
 const ( 
 	//ILLEGAL unknown type
 	ILLEGAL = "ILLEGAL"
-	//EOF end of file
-	EOF	= "EOF"
 	//IDENT identifier
 	IDENT = "IDENT"
+	//FUNCTION function declaration
+	FUNCTION = "FUNCTION"
+	//LET identifier naming
+	LET = "LET"
+	//EOF end of file
+	EOF	= ""
 	//INT integer
 	INT = "INT"
 	//ASSIGN identifier assignment
@@ -31,11 +30,14 @@ const (
 	//LCURLY open block
 	LCURLY = "{"
 	//RCURLY close block
-	RCURLY = "}"
-	//FUNCTION function declaration
-	FUNCTION = "FUNCTION"
-	//LET identifier naming
-	LET = "LET"	
+	RCURLY = "}"	
 )
+
+//Token keywords, symbols
+type Token struct {
+	Type	TokenType
+	Literal string
+}
+
 
 //PRODUCTION wants filenames linenumbers
