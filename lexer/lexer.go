@@ -1,3 +1,4 @@
+//BUG(nicholasgriffen): Lexers lack Unicode, UTF-8 support
 package lexer
 import "interpreter/token"
 //Lexer takes source code and returns tokens 
@@ -131,6 +132,3 @@ func (lexer *Lexer) parseNumber() string {
 	}
 	return lexer.input[position:lexer.position]
 }
-
-
-//PRODUCTION wants Unicode UTF-8 support
