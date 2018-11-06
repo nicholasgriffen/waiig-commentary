@@ -28,9 +28,8 @@ func (lexer *Lexer) setNextCharacter() {
 func (lexer *Lexer) getNextCharacter() byte {
 	if lexer.nextPosition >= len(lexer.input) {
 		return 0
-	} else {
-		return lexer.input[lexer.nextPosition]
-	}
+	}	
+	return lexer.input[lexer.nextPosition]
 }
 //NextToken creates token and steps position
 func (lexer *Lexer) NextToken() token.Token {
