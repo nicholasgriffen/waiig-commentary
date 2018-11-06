@@ -7,20 +7,29 @@ import (
 )
 
 func TestNextToken(test *testing.T) {
-	input := `let six = 6;
+	input := `-/*let six = 6;
 	let nineteen = 19;
 	
 	let add = fn(x, y) {
 			x + y;
 		};
-		
+	<>!
 	let result = add(six, nineteen);
+	if (result == 25) {
+		return true;
+	} else {
+		return false;
+	}
+	25 != result;
 	`
 
 	tests := []struct {
 		expectedType	token.TokenType
 		expectedLiteral string
 	}{
+		{token.MINUS, "-"},
+		{token.FSLASH, "/"},
+		{token.STAR, "*"},
 		{token.LET, "let"},
 		{token.IDENT, "six"},
 		{token.ASSIGN, "="},
@@ -47,6 +56,9 @@ func TestNextToken(test *testing.T) {
 		{token.SEMICOLON, ";"},
 		{token.RCURLY, "}"},
 		{token.SEMICOLON, ";"},
+		{token.LTHAN, "<"},
+		{token.RTHAN, ">"},
+		{token.BANG, "!"},
 		{token.LET, "let"},
 		{token.IDENT, "result"},
 		{token.ASSIGN, "="},
@@ -56,6 +68,27 @@ func TestNextToken(test *testing.T) {
 		{token.COMMA, ","},
 		{token.IDENT, "nineteen"},
 		{token.RROUND, ")"},
+		{token.SEMICOLON, ";"},
+		{token.IF, "if"},
+		{token.LROUND, "("},
+		{token.IDENT, "result"},
+		{token.IS, "=="},
+		{token.INT, "25"},
+		{token.RROUND, ")"},
+		{token.LCURLY, "{"},
+		{token.RETURN, "return"},
+		{token.TRUE, "true"},
+		{token.SEMICOLON, ";"},
+		{token.RCURLY, "}"},
+		{token.ELSE, "else"},
+		{token.LCURLY, "{"},
+		{token.RETURN, "return"},
+		{token.FALSE, "false"},
+		{token.SEMICOLON, ";"},
+		{token.RCURLY, "}"},
+		{token.INT, "25"},
+		{token.ISNOT, "!="},
+		{token.IDENT, "result"},
 		{token.SEMICOLON, ";"},
 		{token.EOF, ""},
 	}
