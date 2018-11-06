@@ -27,6 +27,7 @@ func (lexer *Lexer) nextCharacter() {
 //NextToken creates token and steps position
 func (lexer *Lexer) NextToken() token.Token {
 	var tok token.Token 
+	lexer.skipWhitespace()
 
 	switch lexer.character {
 	case '=':
@@ -45,6 +46,24 @@ func (lexer *Lexer) NextToken() token.Token {
 		tok = newToken(token.LCURLY, lexer.character)
 	case '}':
 		tok = newToken(token.RCURLY, lexer.character)
+	case '1':
+		tok = newToken(token.INT, lexer.character)
+	case '2':
+		tok = newToken(token.INT, lexer.character)
+	case '3':
+		tok = newToken(token.INT, lexer.character)
+	case '4':
+		tok = newToken(token.INT, lexer.character)
+	case '5':
+		tok = newToken(token.INT, lexer.character)
+	case '6':
+		tok = newToken(token.INT, lexer.character)
+	case '7':
+		tok = newToken(token.INT, lexer.character)
+	case '8':
+		tok = newToken(token.INT, lexer.character)
+	case '9':
+		tok = newToken(token.INT, lexer.character)
 	case '0':
 		tok.Literal = ""
 		tok.Type = token.EOF
@@ -61,6 +80,12 @@ func (lexer *Lexer) NextToken() token.Token {
 	return tok
 }
 
+func (lexer *Lexer) skipWhitespace() {
+	for lexer.character == ' ' || lexer.character == '\n' || lexer.character == '\t' || lexer.character == '\r' {
+		lexer.nextCharacter()
+	}
+}
+
 func newToken(tokenType token.TokenType, character byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(character)}
 }
@@ -74,6 +99,6 @@ func (lexer *Lexer) checkIdentifier() string {
 }
 
 func isLetter(character byte) bool {
-	return 'a' <= character && character <= 'z' || 'A' <= character && character <= 'Z' || character == '_'
+	return 'a' <= character && character <= 'z' || 'A' <= character && character <= 'Z' || character == '_' 
 }
 //PRODUCTION wants Unicode UTF-8 support
