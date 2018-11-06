@@ -1,3 +1,13 @@
+# Quick Start
+## Install
+```bash
+git clone git@github.com:nicholasgriffen/waiig-commentary.git
+```
+## Start repl 
+```bash
+cd waiig-commentary
+go run .
+```
 # repl
 --
     import "interpreter/repl"

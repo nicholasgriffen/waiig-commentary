@@ -1,3 +1,4 @@
+//BUG(nicholasgriffen): Tokens lack filenames, linenumbers
 package token
 //TokenType matters downstream
 type TokenType string
@@ -81,6 +82,3 @@ type Token struct {
 	Type	TokenType
 	Literal string
 }
-
-
-//PRODUCTION wants filenames linenumbers
