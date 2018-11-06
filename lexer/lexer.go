@@ -7,8 +7,8 @@ type Lexer struct {
 	character byte
 }
 //New takes string and returns initialized lexer
-func New(input string) *Lexer {
-	lexer := &Lexer{input: input}
+func New(input string) Lexer {
+	lexer := Lexer{input: input}
 	lexer.setNextCharacter()
 	return lexer
 }
@@ -82,8 +82,8 @@ func (lexer *Lexer) NextToken() token.Token {
 		tok.Type = token.EOF
 	default: 
 		if isLetter(lexer.character) {
-			tok.Literal = lexer.parseIdentifier() //used in token.FindIdent
-			tok.Type = token.FindIdent(tok.Literal)
+			tok.Literal = lexer.parseIdentifier() // 1
+			tok.Type = token.FindIdent(tok.Literal) // 2
 			return tok
 		} else if isDigit(lexer.character) {
 			tok.Literal = lexer.parseNumber()
