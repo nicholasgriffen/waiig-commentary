@@ -46,34 +46,21 @@ func (lexer *Lexer) NextToken() token.Token {
 		tok = newToken(token.LCURLY, lexer.character)
 	case '}':
 		tok = newToken(token.RCURLY, lexer.character)
-	case '1':
-		tok = newToken(token.INT, lexer.character)
-	case '2':
-		tok = newToken(token.INT, lexer.character)
-	case '3':
-		tok = newToken(token.INT, lexer.character)
-	case '4':
-		tok = newToken(token.INT, lexer.character)
-	case '5':
-		tok = newToken(token.INT, lexer.character)
-	case '6':
-		tok = newToken(token.INT, lexer.character)
-	case '7':
-		tok = newToken(token.INT, lexer.character)
-	case '8':
-		tok = newToken(token.INT, lexer.character)
-	case '9':
-		tok = newToken(token.INT, lexer.character)
-	case '0':
+	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF
 	default: 
 		if isLetter(lexer.character) {
-			tok.Literal = lexer.checkIdentifier()
+			tok.Literal = lexer.parseIdentifier()
 			tok.Type = token.FindIdent(tok.Literal)
 			return tok
-		} 
-		tok = newToken(token.ILLEGAL, lexer.character)
+		} else if isDigit(lexer.character) {
+			tok.Type = token.INT 
+			tok.Literal = lexer.parseNumber()
+			return tok
+		} else {
+			tok = newToken(token.ILLEGAL, lexer.character)
+		}
 	}
 
 	lexer.nextCharacter()
@@ -90,15 +77,29 @@ func newToken(tokenType token.TokenType, character byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(character)}
 }
 
-func (lexer *Lexer) checkIdentifier() string {
-	position := lexer.position 
+func isLetter(character byte) bool {
+	return 'a' <= character && character <= 'z' || 'A' <= character && character <= 'Z' || character == '_' 
+}
+
+func isDigit(character byte) bool {
+	return '0' <= character && character <= '9'
+}
+
+func (lexer *Lexer) parseIdentifier() string {
+	firstCharacter := lexer.position 
 	for isLetter(lexer.character) {
+		lexer.nextCharacter()
+	}
+	return lexer.input[firstCharacter:lexer.position]
+}
+
+func (lexer *Lexer) parseNumber() string {
+	position := lexer.position 
+	for isDigit(lexer.character) {
 		lexer.nextCharacter()
 	}
 	return lexer.input[position:lexer.position]
 }
 
-func isLetter(character byte) bool {
-	return 'a' <= character && character <= 'z' || 'A' <= character && character <= 'Z' || character == '_' 
-}
+
 //PRODUCTION wants Unicode UTF-8 support

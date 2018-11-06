@@ -12,9 +12,10 @@ func TestNextToken(test *testing.T) {
 	
 	let add = fn(x, y) {
 			x + y;
-		}
+		};
 		
-	let result = add(six, 19)`
+	let result = add(six, nineteen);
+	`
 
 	tests := []struct {
 		expectedType	token.TokenType
@@ -39,20 +40,21 @@ func TestNextToken(test *testing.T) {
 		{token.COMMA, ","},
 		{token.IDENT, "y"},
 		{token.RROUND, ")"},
-		{token.SEMICOLON, ";"},
 		{token.LCURLY, "{"},
 		{token.IDENT, "x"},
 		{token.PLUS, "+"},
 		{token.IDENT, "y"},
+		{token.SEMICOLON, ";"},
 		{token.RCURLY, "}"},
+		{token.SEMICOLON, ";"},
 		{token.LET, "let"},
-		{token.IDENT, " result"},
+		{token.IDENT, "result"},
 		{token.ASSIGN, "="},
 		{token.IDENT, "add"},		
 		{token.LROUND, "("},
-		{token.IDENT, "x"},
+		{token.IDENT, "six"},
 		{token.COMMA, ","},
-		{token.IDENT, "y"},
+		{token.IDENT, "nineteen"},
 		{token.RROUND, ")"},
 		{token.SEMICOLON, ";"},
 		{token.EOF, ""},
