@@ -24,7 +24,7 @@ func (lexer *Lexer) nextCharacter() {
 	lexer.position = lexer.nextPosition
 	lexer.nextPosition ++
 }
-//
+//NextToken creates token and steps position
 func (lexer *Lexer) NextToken() token.Token {
 	var tok token.Token 
 
@@ -48,6 +48,14 @@ func (lexer *Lexer) NextToken() token.Token {
 	case '0':
 		tok.Literal = ""
 		tok.Type = token.EOF
+	default: 
+		if isLetter(lexer.character) {
+			tok.Literal = lexer.checkIdentifier()
+			return tok
+		} 
+			
+		tok = newToken(token.ILLEGAL, lexer.character)
+		
 	}
 
 	lexer.nextCharacter()
@@ -58,4 +66,15 @@ func newToken(tokenType token.TokenType, character byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(character)}
 }
 
+func (lexer *Lexer) checkIdentifier() string {
+	position := lexer.position 
+	for isLetter(lexer.character) {
+		lexer.nextCharacter()
+	}
+	return lexer.input[position:lexer.position]
+}
+
+func isLetter(character byte) bool {
+	return 'a' <= character && character <= 'z' || 'A' <= character && character <= 'Z' || character == '_'
+}
 //PRODUCTION wants Unicode UTF-8 support

@@ -19,7 +19,7 @@ const (
 	ASSIGN = "="
 	//PLUS sum
 	PLUS = "+"
-	//COMMA expression separator
+	//COMMA expression separator{}
 	COMMA = ","
 	//SEMICOLON statement terminator
 	SEMICOLON = ";"
