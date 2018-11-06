@@ -51,11 +51,10 @@ func (lexer *Lexer) NextToken() token.Token {
 	default: 
 		if isLetter(lexer.character) {
 			tok.Literal = lexer.checkIdentifier()
+			tok.Type = token.FindIdent(tok.Literal)
 			return tok
 		} 
-			
 		tok = newToken(token.ILLEGAL, lexer.character)
-		
 	}
 
 	lexer.nextCharacter()

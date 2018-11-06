@@ -33,6 +33,17 @@ const (
 	RCURLY = "}"	
 )
 
+var keywords = map[string]TokenType{
+	"fn": FUNCTION,
+	"let": LET,
+}
+
+func FindIdent(ident string) TokenType {
+	if token, ok := keywords[ident]; ok {
+		return token
+	}
+	return IDENT
+}
 //Token keywords, symbols
 type Token struct {
 	Type	TokenType
