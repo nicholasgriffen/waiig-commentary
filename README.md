@@ -8,7 +8,13 @@ git clone git@github.com:nicholasgriffen/waiig-commentary.git
 cd waiig-commentary
 go run .
 ```
-### docs generated with [godocdown](https://github.com/robertkrimen/godocdown)
+## Update docs 
+[godocdown](https://github.com/robertkrimen/godocdown)
+```bash
+go get github.com/robertkrimen/godocdown/godocdown
+godocdown /path/to/package > package.md
+cat README.md package.md > README.md
+```
 
 # repl
 --
