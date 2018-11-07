@@ -8,6 +8,8 @@ git clone git@github.com:nicholasgriffen/waiig-commentary.git
 cd waiig-commentary
 go run .
 ```
+### docs generated with [godocdown](https://github.com/robertkrimen/godocdown)
+
 # repl
 --
     import "interpreter/repl"
