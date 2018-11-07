@@ -13,7 +13,7 @@ go run .
 ```bash
 go get github.com/robertkrimen/godocdown/godocdown
 godocdown /path/to/package > package.md
-cat README.md package.md > README.md
+cat package.md >> README.md
 ```
 
 # repl
