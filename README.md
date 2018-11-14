@@ -6,7 +6,7 @@ git clone git@github.com:nicholasgriffen/waiig-commentary.git
 ## Start repl 
 ```bash
 cd waiig-commentary
-go run .
+go run main.go
 ```
 ## Update docs 
 [godocdown](https://github.com/robertkrimen/godocdown)
